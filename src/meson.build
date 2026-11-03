@@ -1,50 +1,27 @@
-# The IPC client, the parser and the helpers are built as a library that
-# remontoire and the tests in ../tests link with.
-common_sources = [
-  'grelier.vala',
-  'config_parser.vala',
-  'helper.vala'
-]
+# remontoire is the Rust crate under rust/, built by cargo with the locked
+# dependency graph (see rust/meson-build.sh). The stylesheet in data/style.css
+# is compiled into the binary.
 
-remontoire_sources = [
-  'main.vala',
-  'slider_window.vala',
-  'arg_parser.vala'
-]
+# The binary links these through its -sys crates; checking them here keeps a
+# missing system library a configure-time error.
+dependency('gio-2.0', version: '>= 2.50')
+dependency('gtk+-3.0', version: '>= 3.22')
 
-grelier_deps = [
-  dependency('glib-2.0'),
-  dependency('gobject-2.0'),
-  dependency('gio-unix-2.0', version: '>= 2.50'),
-  dependency('json-glib-1.0'),
-  meson.get_compiler('vala').find_library('posix')
-]
+cargo = find_program('cargo')
+cargo_build = find_program('../rust/meson-build.sh')
 
-remontoire_deps = [
-  dependency('gio-2.0', version: '>= 2.50'),
-  dependency('gtk+-3.0', version: '>= 3.22'),
-  dependency('gdk-3.0', version: '>= 3.22'),
-  dependency('gee-0.8')
-]
-
-common_lib = static_library('remontoire-common', common_sources,
-  vala_args: ['--target-glib=auto'],  dependencies: [grelier_deps, remontoire_deps],
-)
-
-common_dep = declare_dependency(link_with: common_lib,
-  include_directories: include_directories('.'),
-  dependencies: [grelier_deps, remontoire_deps],
-)
-
-remontoire_sources += import( 'gnome' ).compile_resources(
-    'project-resources',
-    '../data/style.xml',
-    source_dir: '../data',
-)
-
-gnome = import('gnome')
-
-remontoire_exe = executable('remontoire', remontoire_sources,
-  vala_args: ['--target-glib=auto'],  dependencies: common_dep,
+remontoire_exe = custom_target('remontoire',
+  output: 'remontoire',
+  command: [
+    cargo_build,
+    cargo,
+    join_paths(meson.project_source_root(), 'rust'),
+    join_paths(meson.current_build_dir(), 'cargo-target'),
+    '@OUTPUT@',
+  ],
+  build_by_default: true,
+  build_always_stale: true,
+  console: true,
   install: true,
+  install_dir: get_option('bindir'),
 )

@@ -1,4 +1,3 @@
 data/org.regolith-linux.remontoire.desktop.in
 data/org.regolith-linux.remontoire.appdata.xml.in
 data/org.regolith-linux.remontoire.gschema.xml
-src/main.vala

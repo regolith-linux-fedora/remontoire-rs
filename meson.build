@@ -1,5 +1,5 @@
-project('remontoire', ['c', 'vala'],        version: '0.1.0',
-  meson_version: '>= 0.53.0',
+project('remontoire', version: '0.1.0',
+  meson_version: '>= 0.56.0',
 )
 
 i18n = import('i18n')

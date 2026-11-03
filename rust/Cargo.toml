@@ -1,0 +1,12 @@
+[package]
+name = "remontoire"
+version = "0.1.0"
+edition = "2021"
+description = "Keybinding viewer for i3 and sway"
+license = "GPL-3.0-or-later"
+publish = false
+
+[dependencies]
+gio = "=0.18.4"
+glib = "=0.18.5"
+gtk = "=0.18.2"

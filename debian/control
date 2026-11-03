@@ -3,13 +3,13 @@ Section: x11
 Priority: optional
 Maintainer: Ken Gilmer <kgilmer@gmail.com>
 Build-Depends: debhelper (>= 10),
+               cargo,
+               pkg-config,
+               rustc,
                gettext,
                libglib2.0-dev (>= 2.50),
                libgtk-3-dev (>= 3.22),
-               meson,
-               valac (>= 0.40.0),
-               libgee-0.8-dev,
-               libjson-glib-dev
+               meson
 Standards-Version: 4.1.2
 Homepage: https://github.com/regolith-linux/remontoire
 

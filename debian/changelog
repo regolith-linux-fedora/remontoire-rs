@@ -1,3 +1,10 @@
+remontoire (1.4.4+rs1) resolute; urgency=medium
+
+  * Rust port of remontoire 1.4.4 (remontoire-rs). See README.md for the
+    status and the differences from upstream remontoire.
+
+ -- rego-port-bot <339843353+rego-port-bot@users.noreply.github.com>  Tue, 03 Nov 2026 12:00:00 +0000
+
 remontoire (1.4.4) focal; urgency=medium
 
   [ x3mboy ]

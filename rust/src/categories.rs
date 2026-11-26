@@ -21,7 +21,7 @@ fn str_hash(text: &str) -> u32 {
     text.bytes().fold(5381u32, |hash, byte| {
         // GLib adds each byte as a signed char.
         hash.wrapping_mul(33)
-            .wrapping_add_signed(i32::from(byte.cast_signed()))
+            .wrapping_add_signed(i32::from(byte as i8))
     })
 }
 

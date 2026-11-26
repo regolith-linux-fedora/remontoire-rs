@@ -2,6 +2,7 @@
 name = "remontoire"
 version = "0.1.0"
 edition = "2021"
+rust-version = "1.85"
 description = "Keybinding viewer for i3 and sway"
 license = "GPL-3.0-or-later"
 publish = false
